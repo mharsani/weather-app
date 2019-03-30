@@ -5,9 +5,9 @@ import error from '../response/error';
 const serviceGet = async url => {
     try {
       const response = await axios.get(url);
-      success(response);
+      return success(response);
     } catch (err) {
-      error(err);
+      return error(err);
     }
   };
 
