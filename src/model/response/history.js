@@ -8,7 +8,7 @@ const responseHistory = r => {
         lat: r.data.lat,
         lon: r.data.lon,
         sources: r.data.sources,
-        station_id: r.data.sources,
+        station_id: r.data.station_id,
         data: r.data.data.map(
             ({
               rh,

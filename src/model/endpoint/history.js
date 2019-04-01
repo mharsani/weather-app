@@ -1,4 +1,4 @@
-import urlHistory from './index';
+import { urlHistory } from './index';
 import key from '../auth/signature';
 
 const endpointHistory = urlHistory;
