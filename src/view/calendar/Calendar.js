@@ -2,11 +2,16 @@ import React, {Fragment} from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import { formatDate, parseDate } from 'react-day-picker/moment';
+import { minusDate } from '../../helper/util/index'
+import { Jumbotron, Container, Row} from 'react-bootstrap';
 
 const Calendar = ({from, to, modifiers, handleFromChange, handleToChange}) => (
     <Fragment>
       <div>
-      <DayPickerInput
+      <Jumbotron fluid>
+        <Container>
+          <Row className="justify-content-sm-center">
+          <DayPickerInput
           value={from}
           placeholder="From"
           format="LL"
@@ -14,16 +19,14 @@ const Calendar = ({from, to, modifiers, handleFromChange, handleToChange}) => (
           parseDate={parseDate}
           dayPickerProps={{
             selectedDays: [from, { from, to }],
-            disabledDays: { after: to },
+            disabledDays: { after: minusDate() },
             toMonth: to,
             modifiers,
             numberOfMonths: 1,
-            onDayClick: () => to.getInput().focus(),
+            onDayClick: () => to.getInput().focus()
           }}
           onDayChange={handleFromChange}
-        />{' '}
-        —{' '}
-        <span className="InputFromTo-to">
+        />
           <DayPickerInput
             ref={el => (to = el)}
             value={to}
@@ -33,7 +36,7 @@ const Calendar = ({from, to, modifiers, handleFromChange, handleToChange}) => (
             parseDate={parseDate}
             dayPickerProps={{
               selectedDays: [from, { from, to }],
-              disabledDays: { before: from },
+              disabledDays: [{ after: new Date()}, { before: from }],
               modifiers,
               month: from,
               fromMonth: from,
@@ -41,7 +44,9 @@ const Calendar = ({from, to, modifiers, handleFromChange, handleToChange}) => (
             }}
             onDayChange={handleToChange}
           />
-        </span>
+          </Row>
+        </Container>
+      </Jumbotron>
         </div>
     </Fragment>
 );
